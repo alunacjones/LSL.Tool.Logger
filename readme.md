@@ -4,4 +4,4 @@
 
 # LSL.Tool.Logger
 
-An internal package for providing a logger for the [LSL.Tool.Template](https://github.com/alunacjones/LSL.Tool.Template/tree/master) repository.
+An internal package for providing a logger for the [LSL.DotNetTool.Template](https://github.com/alunacjones/LSL.DotNetTool.Template/tree/master) repository.
