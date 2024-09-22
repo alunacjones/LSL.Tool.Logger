@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <SnkFile>LSL.snk</SnkFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="Exists('$(SnkFile)')">
+    <AssemblyOriginatorKeyFile>$(SnkFile)</AssemblyOriginatorKeyFile>
+    <SignAssembly>True</SignAssembly>      
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <LangVersion>11</LangVersion>
+    <IsPackable>true</IsPackable>
+    <TargetFrameworks>netstandard2.1</TargetFrameworks>
+    <Version>1.0.1</Version>
+    <PackageVersion>1.0.1</PackageVersion>
+    <PackageTags></PackageTags>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <PackageDescription>Description here</PackageDescription>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/alunacjones/LSL.Tool.Logger</RepositoryUrl>
+    <Authors>alunacjones</Authors>
+  </PropertyGroup>
+
+  <PropertyGroup>
+      <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LSL.AbstractConsole.ServiceProvider" Version="1.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\readme.md" Pack="true" PackagePath=""/>
+  </ItemGroup>   
+</Project>
