@@ -22,12 +22,12 @@ public class Tests
                 services
                     .AddAbstractConsole(s => s.TextWriter = writer)
                     .AddSingleton<LoggingTesting>()
-                    .AddLogging(l =>
+                    .AddLogging(logging =>
                     {
-                        l.ClearProviders();
-
-                        l.Services.AddDotNetToolLogger();
-                        l.SetMinimumLevel(LogLevel.Trace);
+                        logging
+                            .ClearProviders()
+                            .AddDotNetToolLogger()
+                            .SetMinimumLevel(LogLevel.Trace);
                     });
 
             })

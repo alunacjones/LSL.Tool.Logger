@@ -9,15 +9,13 @@ namespace LSL.Tool.Logger;
 /// </summary>
 public class DotNetToolLogger : ILogger
 {
-    private IConsole _console;
+    private readonly IConsole _console;
+    private readonly DotNetToolLoggerOptions _options;
 
-    /// <summary>
-    /// Primary constructor
-    /// </summary>
-    /// <param name="console"></param>
-    public DotNetToolLogger(IConsole console)
+    internal DotNetToolLogger(IConsole console, DotNetToolLoggerOptions options)
     {
         _console = console;
+        _options = options;
     }
 
     /// <inheritdoc/>
@@ -27,10 +25,11 @@ public class DotNetToolLogger : ILogger
     public bool IsEnabled(LogLevel logLevel) => true;
 
     /// <inheritdoc/>
-    public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter) =>
-        _console
-            .Write($"[{LogLevelToShortCode(logLevel)}] ")
-            .WriteLine($"{formatter(state, exception)}");
+    public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+    {
+        var context = new OutputContext(formatter(state, exception), LogLevelToShortCode(logLevel), logLevel);
+        _console.WriteLine(_options.LoggingOutputBuilder(context));
+    }
 
     private static string LogLevelToShortCode(LogLevel logLevel) => logLevel switch
     {
